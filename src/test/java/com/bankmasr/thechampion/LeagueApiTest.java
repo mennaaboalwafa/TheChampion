@@ -20,8 +20,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -56,13 +59,8 @@ class LeagueApiTest {
 
     mvc.perform(post("/league/newMatch")
             .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.content().string("{\n" +
-                    "    \"roundId\":1,\n" +
-                    "    \"matchRealTime\":\"1639156727\",\n" +
-                    "    \"teamsId\":[101,109]\n" +
-                    " \n" +
-                    "}"))
+            .andExpect(status().isAccepted())
+            .andExpect(MockMvcResultMatchers.content().string("Match Submitted"))
     ;
 
     Assertions.assertNotNull(response);
@@ -79,12 +77,10 @@ class LeagueApiTest {
 
     mvc.perform(post("/league/champ/6")
             .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isAccepted())
-            .andExpect(status().isNoContent());
+            .andExpect(status().isAccepted()).
+           andExpect(MockMvcResultMatchers.content().string("Champion Submitted"))
     ;
 
-    Assertions.assertNotNull(response);
-    Assertions.assertTrue(StringUtils.isNotBlank(String.valueOf(response)));
   }
 
 }
