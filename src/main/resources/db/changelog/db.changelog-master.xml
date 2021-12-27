@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="ihuser (generated)" id="1640607985165-1">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="PLAYER">
+            <column name="PLAYER_NAME" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLAYER_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLAYER_JOB_TITLE" type="VARCHAR2(200)"/>
+            <column name="PLAYER_STAFF_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="CREATED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="MODIFIED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLAYER_EMAIL" type="VARCHAR2(200)"/>
+            <column defaultValueNumeric="0" name="IS_CHAMP" type="NUMBER(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEAGUE_ID" type="NUMBER"/>
+            <column name="TEAM_ID" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-2">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="LEAGUE">
+            <column name="LEAGUE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="date"/>
+            <column name="END_DATE" type="date"/>
+            <column defaultValueNumeric="0" name="HAS_CHAMPION" remarks="0= no winners" type="NUMBER(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEAGUE_DESC" type="VARCHAR2(200)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="CREATED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="MODIFIED_AT" type="TIMESTAMP"/>
+            <column defaultValueNumeric="0" name="IS_CLOSED" remarks="1 closed" type="NUMBER(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRENT_ROUND" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-3">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="ROUND">
+            <column name="ROUND_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="CREATED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="ROUND_CLOSE" remarks="1=closedd&#10;0=opened" type="NUMBER(1)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="MODIFIED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-4">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="LEAGUE_ROUNDS">
+            <column name="LEAGUE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROUND_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-5">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="TEAM">
+            <column name="TEAM_NAME" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEAM_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="TEAM_SCORE" type="NUMBER"/>
+            <column name="MATCH_ID" type="NUMBER"/>
+            <column defaultValueNumeric="0" name="IS_WINNER" remarks="not winner" type="NUMBER(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="CREATED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="MODIFIED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-6">
+        <createTable catalogName="TENNIS_TABLE_LEAGUE" tableName="MATCH">
+            <column name="MATCH_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MATCH_WINNER" type="NUMBER"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="CREATED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROUND_ID" type="NUMBER"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP " name="MODIFIED_AT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="MATCH_SCORE" type="NUMBER(38)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MATCH_REAL_TIME" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-7">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="MATCH_ID" constraintName="MATCH_PK" tableName="MATCH"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-8">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="LEAGUE_ID" constraintName="LEAGUE_PK" tableName="LEAGUE"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-9">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="PLAYER_ID" constraintName="PLAYER_PK" tableName="PLAYER"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-10">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="ROUND_ID" constraintName="ROUND_PK" tableName="ROUND"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-11">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="TEAM_ID" constraintName="TEAM_PK" tableName="TEAM"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-12">
+        <addPrimaryKey catalogName="TENNIS_TABLE_LEAGUE" columnNames="LEAGUE_ID, ROUND_ID" constraintName="LEAGUE_ROUNDS_PK" tableName="LEAGUE_ROUNDS"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-13">
+        <addForeignKeyConstraint baseColumnNames="LEAGUE_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="LEAGUE_ROUNDS" constraintName="LEAGUE_ROUNDS_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="LEAGUE_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="LEAGUE"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-14">
+        <addForeignKeyConstraint baseColumnNames="TEAM_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="PLAYER" constraintName="PLAYER_FK2" deferrable="false" initiallyDeferred="false" onDelete="SET NULL" onUpdate="RESTRICT" referencedColumnNames="TEAM_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="TEAM"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-15">
+        <addForeignKeyConstraint baseColumnNames="ROUND_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="LEAGUE_ROUNDS" constraintName="LEAGUE_ROUNDS_FK2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="ROUND_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="ROUND"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-16">
+        <addForeignKeyConstraint baseColumnNames="CURRENT_ROUND" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="LEAGUE" constraintName="LEAGUE_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="ROUND_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="ROUND"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-17">
+        <addForeignKeyConstraint baseColumnNames="MATCH_WINNER" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="MATCH" constraintName="MATCH_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="TEAM_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="TEAM"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-18">
+        <addForeignKeyConstraint baseColumnNames="LEAGUE_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="PLAYER" constraintName="PLAYER_FK1" deferrable="false" initiallyDeferred="false" onDelete="SET NULL" onUpdate="RESTRICT" referencedColumnNames="LEAGUE_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="LEAGUE"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-19">
+        <addForeignKeyConstraint baseColumnNames="MATCH_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="TEAM" constraintName="TEAM_FK1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="MATCH_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="MATCH"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-20">
+        <addForeignKeyConstraint baseColumnNames="ROUND_ID" baseTableCatalogName="TENNIS_TABLE_LEAGUE" baseTableName="MATCH" constraintName="MATCH_FK2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="ROUND_ID" referencedTableCatalogName="TENNIS_TABLE_LEAGUE" referencedTableName="ROUND"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-21">
+        <createSequence catalogName="TENNIS_TABLE_LEAGUE" sequenceName="ROUND_SEQ"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-22">
+        <createSequence catalogName="TENNIS_TABLE_LEAGUE" sequenceName="MATCH_SEQ"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-23">
+        <createSequence catalogName="TENNIS_TABLE_LEAGUE" sequenceName="LEAGUE_SEQ"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-24">
+        <createSequence catalogName="TENNIS_TABLE_LEAGUE" sequenceName="PLAYER_SEQ"/>
+    </changeSet>
+    <changeSet author="ihuser (generated)" id="1640607985165-25">
+        <createSequence catalogName="TENNIS_TABLE_LEAGUE" sequenceName="TEAM_SEQ"/>
+    </changeSet>
+</databaseChangeLog>
